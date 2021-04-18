@@ -1,10 +1,11 @@
 # Expense Tracker
+
 A bare bone starter kit for Tailwind CSS ready for JIT.
 
 Clone it...
 
 ```
-git clone https://github.com/Yash-s-Code-Camp/expense-tracker/tree/master
+git clone https://github.com/Yash-s-Code-Camp/expense-tracker.git
 cd expense-tracker
 ```
 
