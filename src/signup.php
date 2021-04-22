@@ -19,8 +19,8 @@
       <input type="password" id="password" name="password" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
     </div>
     <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Signup</button>
-    
-    <a href="./signup.php" class="text-sm text-indigo-500 mt-3 underline hover:text-indigo-400">Already have an account?</a>
+
+    <a href="./login.php" class="text-sm text-indigo-500 mt-3 underline hover:text-indigo-400">Already have an account?</a>
   </div>
 </div>
 <?php include "./layouts/bottom.php"; ?>
