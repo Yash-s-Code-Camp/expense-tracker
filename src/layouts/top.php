@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <header class="text-gray-600 body-font">
+  <header class="text-gray-600 body-font hidden md:block">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
       <a href="./index.php" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 20 20" fill="currentColor">
@@ -19,7 +19,7 @@
        
         <span class="ml-3 text-xl">Expense Tracker</span>
       </a>
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center space-x-5">
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center space-x-5 ">
         <a href="./index.php" class="flex tems-center  py-1 px-2 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
         <a href="./about.php" class="flex items-center py-1 px-2 rounded hover:bg-indigo-500 hover:text-indigo-50">About</a>
         <a href="./contact.php" class="flex tems-center  py-1 px-2 rounded hover:bg-indigo-500 hover:text-indigo-50">Contact Us</a>
