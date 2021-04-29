@@ -1,7 +1,7 @@
 const hum_icon = document.querySelector('#hamburger')
 const close_icon = document.querySelector('#close')
 
-hum_icon.addEventListener('click', function()
+hum_icon.addEventListener('click', function display()
 {
     close_icon.classList.remove('hidden')
     close_icon.classList.add('block')
@@ -11,7 +11,7 @@ hum_icon.addEventListener('click', function()
 
     console.log('hamburger click')
 })
-close_icon.addEventListener('click', function()
+close_icon.addEventListener('click', function display()
 {
     close_icon.classList.remove('block')
     close_icon.classList.add('hidden')
