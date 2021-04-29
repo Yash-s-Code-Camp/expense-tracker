@@ -21,7 +21,7 @@
         <span class="ml-3 text-xl">Expense Tracker</span>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center space-x-5 ">
-      <div class="toggle block absolute top-5 right-10 w-30 h-30 md:hidden">
+      <div class="toggle block absolute top-8 right-10 w-30 h-30 md:hidden">
         <button id="hamburger">
           <svg class="h-16 w-16  p-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
