@@ -6,7 +6,7 @@
     include "../vendor/autoload.php";
 
     function sendMail($to,$subject,$body){
-        include "./config.php";
+        include "./mailconfig.php";
         $mail = new PHPMailer(true); 
 
         try {
@@ -26,9 +26,9 @@
             $mail->Subject = $subject;
             $mail->Body    = $body;
             $mail->send();
-            
+            echo "Mail has been sent successfully!";
             return true;
-            //echo "Mail has been sent successfully!";
+            
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             return false;
