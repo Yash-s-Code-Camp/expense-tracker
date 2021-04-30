@@ -1,6 +1,6 @@
 <?php include "./layouts/top.php"; ?>
 <!-- Container -->
-<div class="flex flex-col px-5 py-24 justify-center items-center space-y-4 ">
+<div class="flex flex-col px-5 py-24 justify-center items-center space-y-4">
   <!-- image-block -->
   <div class="rounded-full">
     <img class="object-cover object-center rounded-full" alt="my-img" src="https://image.freepik.com/free-vector/family-couple-saving-money_74855-5240.jpg">

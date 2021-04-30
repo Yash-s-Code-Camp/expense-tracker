@@ -1,6 +1,6 @@
 
-<div class="bg-gray-100 ">
-  <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sticky bottom-0 sm:flex-row">
+<div class="w-full bg-gray-100 bottom-0 fixed">
+  <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
     <p class="text-gray-500 text-sm text-center sm:text-left">© 2021 Expense Tracker
     </p>
     <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
