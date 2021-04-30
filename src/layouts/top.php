@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="h-screen">
+
   <header class="text-gray-600 body-font md:block">
     <div class="container mx-auto flex flex-wrap p-8 flex-col md:flex-row">
       <a href="./index.php" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
