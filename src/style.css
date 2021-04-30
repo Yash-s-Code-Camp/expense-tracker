@@ -657,6 +657,10 @@ video {
 		opacity: .5;
 	}
 }
+.animate-pulse {
+	-webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 .flex-col {
 	flex-direction: column;
 }
@@ -699,6 +703,9 @@ video {
 .border-0 {
 	border-width: 0px;
 }
+.border-2 {
+	border-width: 2px;
+}
 .border-gray-300 {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -722,6 +729,10 @@ video {
 .bg-red-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(254, 226, 226, var(--tw-bg-opacity));
+}
+.bg-indigo-100 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
 }
 .object-cover {
 	-o-object-fit: cover;
@@ -880,11 +891,35 @@ video {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
 }
+.transition {
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+.transition-all {
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+.delay-150 {
+	transition-delay: 150ms;
+}
 .duration-200 {
 	transition-duration: 200ms;
 }
+.duration-300 {
+	transition-duration: 300ms;
+}
+.duration-1000 {
+	transition-duration: 1000ms;
+}
 .ease-in-out {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ease-in {
+	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 .hover\:animate-pulse:hover {
 	-webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -922,6 +957,25 @@ video {
 .focus\:ring-indigo-200:focus {
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(199, 210, 254, var(--tw-ring-opacity));
+}
+@media (min-width: 640px) {
+
+	.sm\:hidden {
+		display: none;
+	}
+
+	.sm\:animate-pulse {
+		-webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+		        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	.sm\:transition {
+		transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+		transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+		transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 150ms;
+	}
 }
 @media (min-width: 768px) {
 

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
   <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
         <span class="ml-3 text-xl">Expense Tracker</span>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center space-x-5 ">
-      <div class="toggle block absolute top-8 right-10 w-30 h-30 md:hidden">
+      <div class="block absolute top-8 right-10 w-30 h-30 md:hidden">
         <button id="hamburger">
           <svg class="h-16 w-16  p-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -33,7 +34,7 @@
           </svg>
         </button>
       </div>
-        <div class="md:flex">
+        <div id="nav-links" class="hidden transition duration-1000 ease-in-out border-2 bg-indigo-100 md:flex">
           <a href="./index.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
           <a href="./about.php" class="flex items-center py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">About</a>
           <a href="./contact.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Contact Us</a>

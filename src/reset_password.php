@@ -1,5 +1,6 @@
 <?php include "./layouts/top.php"; ?>
 
+
 <form action="#" method="post">
 <div class=" flex flex-col px-24 lg:px-64  py-24 justify-center items-center space-y-4">
   <div class="lg:w-2/6  bg-gray-100 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">
