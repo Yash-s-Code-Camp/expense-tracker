@@ -6,21 +6,25 @@
     header("Location: index.php");
   }
 
+
   if (isset($_POST['change_pwd'])) {
 
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     if ($password == $confirm_password) {
-      $query = "UPDATE `users` SET `password` = $password WHERE `email` = '". $_COOKIE['useremail'] ."'";
+      $query = "UPDATE `users` SET `password` = '$password' WHERE `email` = '". $_COOKIE['useremail'] ."'";
       $res = mysqli_query($conn,$query);
 
       if ($res) {
-        setcookie('otp',$otp, time()-300);
-        setcookie('useremail',$_POST['email'], time()-300);
-        setcookie('otp_verification','Done', time()-300);
+        setcookie('otp','', time()-300);
+        setcookie('useremail','', time()-300);
+        setcookie('otp_verification','', time()-300);
 
-        header("Location: login.php");
+
+        //sleep(5);
+        header("Refresh:5; url=login.php");
+        $error = 0;
       }
       else{
         echo mysqli_error($conn);
@@ -48,8 +52,8 @@
       </div>
       <button type="submit" name="change_pwd" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Change Password</button>
 
-      <div id="alert" class="bg-red-100 border border-red-400 mt-4 text-red-700 px-4 py-3 rounded relative <?= (isset($error) ? '' : 'hidden' ) ?> " role="alert">
-        <strong class="font-semibold">Passwords are not matching!</strong>
+      <div id="alert" class=" mt-4  px-4 py-3 rounded relative <?= (($error == 0) ? "bg-green-100  border-green-400 text-green-700" : "bg-red-100  border-red-400 text-red-700"); ?> <?= (isset($error) ? '' : 'hidden' ) ?> <?= (isset($error) ? '' : 'hidden' ) ?> " role="alert">
+        <strong class="font-semibold"><?= ($error == 0)? "Password updated succesfully!" : "Passwords are not matching!" ?></strong>
         
       </div>
 
