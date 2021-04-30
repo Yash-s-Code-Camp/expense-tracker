@@ -18,3 +18,5 @@
     </div>
   </div>
 </form>
+
+<?php include "./layouts/bottom.php"; ?>

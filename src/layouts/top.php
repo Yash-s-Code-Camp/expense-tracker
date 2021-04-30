@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+  <div class="h-screen">
   <header class="text-gray-600 body-font md:block">
     <div class="container mx-auto flex flex-wrap p-8 flex-col md:flex-row">
       <a href="./index.php" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -34,11 +34,11 @@
           </svg>
         </button>
       </div>
-        <div id="nav-links" class="hidden transition duration-1000 ease-in-out border-2 bg-indigo-100 md:flex">
-          <a href="./index.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
-          <a href="./about.php" class="flex items-center py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">About</a>
-          <a href="./contact.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Contact Us</a>
-          <a href="./login.php" class="inline-flex items-center bg-indigo-500 text-indigo-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-indigo-50 rounded text-base mt-4 md:mt-0 uppercase">Start now</a>
+        <div id="nav-links" class="hidden transition duration-1000 ease-in-out  md:flex">
+          <a href="./index.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 text-center hover:text-indigo-50">Home</a>
+          <a href="./about.php" class="flex items-center py-1 px-4 rounded hover:bg-indigo-500 text-center hover:text-indigo-50">About</a>
+          <a href="./contact.php" class="flex tems-center  py-1 px-4 rounded hover:bg-indigo-500 text-center hover:text-indigo-50">Contact Us</a>
+          <a href="./login.php" class="inline-flex items-center bg-indigo-500 text-center text-indigo-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-indigo-50 rounded text-base mt-4 md:mt-0 uppercase">Start now</a>
         </div>
       </nav>
 
