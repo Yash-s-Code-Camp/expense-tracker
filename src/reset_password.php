@@ -1,4 +1,24 @@
-<?php include "./layouts/top.php"; ?>
+<?php 
+  include "./layouts/top.php";
+  
+  if (!isset($_COOKIE['otp'])) {
+    header("Location: index.php");
+  }
+
+  if (isset($_POST['receive_otp'])) {
+    $otp = $_POST['otp'];
+
+    if ($otp == $_COOKIE['otp']) {
+      setcookie('otp_verification','Done', time()+300);
+      header("Location: change_password.php");
+    }
+    else {
+      $error = 1;
+    }
+  }
+
+?>
+
 
 
 <form action="#" method="post">

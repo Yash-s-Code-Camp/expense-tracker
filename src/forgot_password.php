@@ -11,14 +11,16 @@
 
 
       $otp = rand(1000,9999);
-      //setcookie('otp',$otp, time()+300);
+      setcookie('otp',$otp, time()+300);
+      setcookie('useremail',$_POST['email'], time()+300);
+
 
       $to = $_POST['email'];
       $subject = "Forgot Password";
-      $body = "Your one time password is $otp<br>OTP will expire in next 5 minutes.";
+      $body = "Your one time password is $otp<br><h3>Reset password link : http://localhost/yashcodecamp/expense-tracker/src/reset_password.php </h3><br>OTP will expire in next 5 minutes.";
       
       if (sendMail($to,$subject,$body)) {
-        //TODO
+        $error = 0;
       }
       
     }
@@ -40,8 +42,10 @@
       </div>
       
       <button type="submit" name="send_otp" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Send OTP</button>
-      <div id="alert" class="bg-red-100 border border-red-400 mt-4 text-red-700 px-4 py-3 rounded relative <?= (isset($error) ? '' : 'hidden' ) ?> " role="alert">
-        <strong class="font-semibold">Email not registered!</strong>
+      <div id="alert" class=" px-4 py-3 mt-4  border rounded relative <?= (($error == 0) ? "bg-green-100  border-green-400 text-green-700" : "bg-red-100  border-red-400 text-red-700"); ?> <?= (isset($error) ? '' : 'hidden' ) ?> " role="alert">
+        <strong class="font-semibold">
+          <?= ($error == 0)? "Mail has been sent succesfully" : "Email not registered!" ?>
+        </strong>
         
       </div>          
   </div>

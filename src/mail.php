@@ -26,7 +26,7 @@
             $mail->Subject = $subject;
             $mail->Body    = $body;
             $mail->send();
-            echo "Mail has been sent successfully!";
+            //echo "Mail has been sent successfully!";
             return true;
             
         } catch (Exception $e) {
