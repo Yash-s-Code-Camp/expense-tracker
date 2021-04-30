@@ -4,6 +4,8 @@
 <?php
 
   include "../db/db.php";
+  include "./mailconfig.php";
+
   session_start();
   if (isset($_SESSION['email'])) {
     header("location:dashboard.php");

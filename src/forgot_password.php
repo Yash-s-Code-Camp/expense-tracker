@@ -2,13 +2,14 @@
 
 <?php
   include "../db/db.php";
+  include "./mailconfig.php";
+
   if (isset($_POST['send_otp'])) {
     $query = "SELECT * from `users` WHERE email = '" . $_POST['email'] . "'";
     $res = mysqli_query($conn,$query);
 
     if (mysqli_num_rows($res) > 0) {
       include "./mail.php";
-
 
       $otp = rand(1000,9999);
       setcookie('otp',$otp, time()+300);
@@ -17,7 +18,7 @@
 
       $to = $_POST['email'];
       $subject = "Forgot Password";
-      $body = "Your one time password is $otp<br><h3>Reset password link : http://localhost/yashcodecamp/expense-tracker/src/reset_password.php </h3><br>OTP will expire in next 5 minutes.";
+      $body = "Your one time password is $otp<br><h3>Reset password link : $root/reset_password.php </h3><br>OTP will expire in next 5 minutes.";
       
       if (sendMail($to,$subject,$body)) {
         $error = 0;
