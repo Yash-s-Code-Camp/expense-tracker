@@ -98,15 +98,22 @@ if (!isset($_SESSION['email'])) {
             "scales": {
                 "yAxes": [{
                     "ticks": {
-                        "beginAtZero": true
+                        "beginAtZero": true,
+                        "fontColor": "rgba(31, 41, 55)",
+                        "fontSize" :14
                     },
                     "gridLines": {
                         "display":false
                     }
                 }],
                 "xAxes": [{
+                    "ticks": {
+                        "fontColor": "rgba(31, 41, 55)",
+                        "fontSize" :14
+                    },
                     "gridLines": {
-                        "display":false
+                        "display":false,
+                        
                     }
                 }],
             }
