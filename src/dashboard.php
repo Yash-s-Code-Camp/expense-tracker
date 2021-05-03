@@ -1,16 +1,12 @@
 <?php
-
-session_start();
+include "./layouts/top.php";
 if (!isset($_SESSION['email'])) {
     header("location:login.php");
 } else {
-    echo "<h1>" . $_SESSION['email'] . "</h1>";
+    // echo "<h1>" . $_SESSION['email'] . "</h1>";
 }
 
-if (isset($_POST['logout'])) {
-    session_destroy();
-    header("location:index.php");
-}
+
 
 ?>
 <div class="container px-5 py-24 mx-auto">
