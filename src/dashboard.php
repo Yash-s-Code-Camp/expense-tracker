@@ -73,7 +73,7 @@ if (!isset($_SESSION['email'])) {
         </div>
 
         <div class="sm:w-1/2 xl:w-1/4 md:w-1/3 m-5  w-full bg-gray-50 rounded shadow-xl text-center">
-            <div class="flex flex-col items-center w-fullp-2">
+            <div class="flex flex-col items-center w-full p-2">
                 <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
             </div>
         </div>
@@ -84,10 +84,10 @@ if (!isset($_SESSION['email'])) {
     new Chart(document.getElementById("chart"), {
         "type": "bar",
         "data": {
-            "labels": ["January", "February", "March", "April"],
+            "labels": ["Jan", "Feb", "Mar", "Apr"],
             "color" : 'red',
             "datasets": [{
-                "label": "Expense History",
+                
                 "data": [5, 15, 10, 30],
                 "type": "line",
                 "fill": false, 
@@ -100,23 +100,32 @@ if (!isset($_SESSION['email'])) {
                     "ticks": {
                         "beginAtZero": true,
                         "fontColor": "rgba(31, 41, 55)",
-                        "fontSize" :14
+                        "stepSize": 100,   
+                        "display":false,
+
                     },
                     "gridLines": {
-                        "display":false
+                        "display":false,
+                        "drawBorder": false,
                     }
                 }],
                 "xAxes": [{
                     "ticks": {
                         "fontColor": "rgba(31, 41, 55)",
-                        "fontSize" :14
+                        
                     },
+                    
                     "gridLines": {
                         "display":false,
+                        "drawBorder": false,
                         
                     }
                 }],
-            }
+            },
+            "legend": {
+                "display": false
+            },
+         
         }
     });
 </script>
