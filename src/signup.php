@@ -3,8 +3,9 @@
 <?php
 include '../db/db.php';
 
-//session start
-session_start();
+if (isset($_SESSION['email'])) {
+  header("location:dashboard.php");
+}
 
 
 if (isset($_POST['signup'])) {

@@ -1,16 +1,12 @@
 <?php include "./layouts/top.php"; ?>
 
 <?php
-
-session_start();
+include "./layouts/top.php";
 if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
 
-if (isset($_POST['logout'])) {
-    session_destroy();
-    header("location:index.php");
-}
+
 
 ?>
 

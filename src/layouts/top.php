@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +39,18 @@
           <a href="./index.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
           <a href="./about.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">About</a>
           <a href="./contact.php" class="flex flex-col text-center py-2 px-2 rounded hover:bg-indigo-500 hover:text-indigo-50">Contact Us</a>
+          <?php
+            if (isset($_SESSION['email'])) {
+          ?>
+          <a href="./logout.php?logout=true" class="flex flex-col text-center bg-red-500 text-red-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-indigo-50 rounded text-base mt-4 md:mt-0 uppercase">Logout</a>
+          <?php
+            }
+            else{
+          ?>
           <a href="./login.php" class="flex flex-col text-center bg-indigo-500 text-indigo-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-indigo-50 rounded text-base mt-4 md:mt-0 uppercase">Start now</a>
+          <?php
+            }
+          ?>
         </div>
       </nav>
 

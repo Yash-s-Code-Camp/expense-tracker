@@ -798,6 +798,10 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
 }
+.bg-red-500 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+}
 .object-cover {
 	-o-object-fit: cover;
 	   object-fit: cover;
@@ -978,6 +982,10 @@ video {
 .text-indigo-500 {
 	--tw-text-opacity: 1;
 	color: rgba(99, 102, 241, var(--tw-text-opacity));
+}
+.text-red-50 {
+	--tw-text-opacity: 1;
+	color: rgba(254, 242, 242, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;
