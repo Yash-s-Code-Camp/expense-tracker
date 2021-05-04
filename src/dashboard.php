@@ -12,9 +12,81 @@
         <div>
             <?php include "./layouts/top.php"; ?>
         </div>
-        <div class="border-2 mt-12 ml-14 mr-8 w-auto h-auto">
+        <div class="border-2 m-10 w-auto h-auto">
            charts: set height width according to you requirement 
            <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+        </div>
+        <div>
+            <h1 class=" mx-10 font-sans font-semibold text-3xl">Categories With Biggest Expense</h1>
+        </div>
+        <div class="m-10 flex flex-wrap justify-between">
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-pink-600">
+                    <i class="fa fa-shopping-basket text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Shopping Cost
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 1200
+                </div>
+            </div>
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-blue-600">
+                    <i class="fa fa-tshirt text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Cloths
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 2500
+                </div>
+            </div>
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-green-600">
+                    <i class="fa fa-camera text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Color Camera
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 3500
+                </div>
+            </div>
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-yellow-600">
+                    <i class="fa fa-home text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Home Loan
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 3000
+                </div>
+            </div>
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-red-600">
+                    <i class="fa fa-gifts text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Birthday Gift
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 1200
+                </div>
+            </div>
+            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
+                <div class="h-20 w-full px-5 pt-3 text-left text-gray-500">
+                    <i class="fa fa-truck text-5xl"></i>
+                </div>
+                <div class="px-5 text-sm text-gray-400">
+                    Pickup Loan
+                </div>
+                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                    $ 4500
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="border-2 w-auto flex flex-col justify-start items-center">

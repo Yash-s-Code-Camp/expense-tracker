@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-
+  
+  <script src="https://kit.fontawesome.com/43b88d4182.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
