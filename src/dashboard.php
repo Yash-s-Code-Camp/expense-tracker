@@ -13,7 +13,8 @@
             <?php include "./layouts/top.php"; ?>
         </div>
         <div class="border-2 mt-12 ml-14 mr-8 w-auto h-auto">
-            <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+           charts: set height width according to you requirement 
+           <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
         </div>
     </div>
     <div class="border-2 w-auto flex flex-col justify-start items-center">
@@ -24,7 +25,7 @@
             <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer"></div>
         </div>
         
-        <div class="mt-12 mx-6 w-60 h-auto">
+        <div class="mt-10 mx-6 w-60 h-auto">
             <label for="categories" class="text-gray-600 text-xl pl-2">Categories</label>
             <div class="mt-5 h-auto w-auto flex justify-center pl-1 pr-2 border-b-2">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +57,7 @@
                 <h5 class="pt-0.5 text-xl ml-36">5K</h5>    
             </div>
         </div>
-        <div class="mt-10 w-60 h-auto bg-indigo-200">calendar</div>
+        <div class="mt-10 w-60 h-40 border-2">calendar</div>
     </div>
 </div>
 <!-- <div class="container px-5 py-24 mx-auto">

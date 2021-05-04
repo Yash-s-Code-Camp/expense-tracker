@@ -731,6 +731,21 @@ video {
 .h-3\/5 {
 	height: 60%;
 }
+.h-60 {
+	height: 15rem;
+}
+.h-40 {
+	height: 10rem;
+}
+.h-0 {
+	height: 0px;
+}
+.h-72 {
+	height: 18rem;
+}
+.h-screen {
+	height: 100vh;
+}
 .w-full {
 	width: 100%;
 }
@@ -882,6 +897,10 @@ video {
 .bg-gray-50 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
+}
+.bg-indigo-100 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
 }
 .object-cover {
 	-o-object-fit: cover;
