@@ -1,10 +1,10 @@
 <?php
     // include "./layouts/top.php";
     session_start();
-    if (!isset($_SESSION['email'])) 
-    {
-        header("location:login.php");
-    }
+    // if (!isset($_SESSION['email'])) 
+    // {
+    //     header("location:login.php");
+    // }
 ?>
 
 <div class="h-full w-full border-2 flex">
@@ -12,9 +12,52 @@
         <div>
             <?php include "./layouts/top.php"; ?>
         </div>
-        <div class="border-2 mt-12 ml-14 mr-8 w-auto h-auto">
-           charts: set height width according to you requirement 
-           <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+        <div class="border-2 mt-12 ml-14 mr-8 rounded-md bg-white shadow-md w-auto h-auto">
+            <div class="flex flex-col md:flex-row flex-wrap w-full">
+                <div class="flex flex-col w-full  lg:w-2/3 ">
+                    <div class="flex flex-wrap w-full">
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-wallet fa-lg w-full text-red-600 p-4 "></i>
+                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="text-red-600 font-semibold p-2">Expenses</p>
+                        </div>
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-donate fa-lg w-full text-blue-600 p-4"></i>
+                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="text-blue-600 font-semibold p-2">Expenses & Revenues</p>
+                        </div>
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
+                            <p class="font-semibold text-2xl p-2">$ 12000</p>
+                            <p class="text-green-600 font-semibold p-2">Revenues</p>
+                        </div>
+                    </div>
+                    <div class="">
+                       <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/3">
+                    <div class="flex flex-col  flex-wrap w-full ">
+                        <div class="px-2 py-5 text-2xl font-medium">Budget</div>
+                        <div class="h-52 ">
+                           <canvas id="chart-doughnut" class="chartjs" width="undefined" height="undefined"></canvas>
+
+                        </div>
+                        <div class="px-2 py-5 text-md font-medium text-center flex space-x-1 ">
+                            <div class="w-1/2">
+                                <p class="text-xl py-1">$35000</p>
+                                <p class="text-gray-500">Monthly Limit</p>
+                            </div>
+                            <div class="w-1/2">
+                                <p class="text-xl py-1">$3000</p>
+                                <p class="text-gray-500">Remaining</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           
         </div>
     </div>
     <div class="border-2 w-auto flex flex-col justify-start items-center">
@@ -131,7 +174,7 @@
     </div>
 </div>-->
 
-<!-- <script>
+<script>
     new Chart(document.getElementById("chart"), {
         "type": "bar",
         "data": {
@@ -146,6 +189,8 @@
             }]
         },
         "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
             "scales": {
                 "yAxes": [{
                     "ticks": {
@@ -179,4 +224,36 @@
          
         }
     });
-</script> -->
+
+    new Chart(document.getElementById("chart-doughnut"), {
+        "type": "doughnut",
+        "data":{
+            "labels": [ "Expense", "Budget"],
+            "datasets": [
+                {
+                    "label": "Expense",
+                    "data": [10,40],
+                    "backgroundColor": [
+                    "rgba(37, 99, 235)",
+                    "rgba(248, 113, 113)",
+                    ],
+                    // "borderColor": [
+                    // "gray",
+                    // "gray"
+                    // ],
+                    // "borderWidth": [2,2]
+                }
+            ],
+            
+        },
+        "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "legend": {
+                "display": false
+            },
+         
+        }
+        
+    });
+</script>
