@@ -1,20 +1,63 @@
 <?php
-    // include "./layouts/top.php";
-    session_start();
-    if (!isset($_SESSION['email'])) 
-    {
-        header("location:login.php");
-    }
+// include "./layouts/top.php";
+session_start();
+// if (!isset($_SESSION['email'])) 
+// {
+//     header("location:login.php");
+// }
 ?>
 
-<div class="h-full w-full border-2 flex">
+<div class=" w-full border-2 flex">
     <div class="border-2 w-full bg-gray-100">
         <div>
             <?php include "./layouts/top.php"; ?>
         </div>
-        <div class="border-2 m-10 w-auto h-auto">
-           charts: set height width according to you requirement 
-           <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+        <div class="border-2 m-10 rounded-md bg-white shadow-md w-auto h-auto">
+            <div class="flex flex-col md:flex-row flex-wrap w-full">
+                <div class="flex flex-col w-full  lg:w-2/3 ">
+                    <div class="flex flex-wrap w-full">
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-wallet fa-lg w-full text-red-600 p-4 "></i>
+                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="text-red-600 font-semibold p-2">Expenses</p>
+                        </div>
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-donate fa-lg w-full text-blue-600 p-4"></i>
+                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="text-blue-600 font-semibold p-2">Expenses & Revenues</p>
+                        </div>
+                        <div class="w-1/3 p-5 text-center">
+                            <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
+                            <p class="font-semibold text-2xl p-2">$ 12000</p>
+                            <p class="text-green-600 font-semibold p-2">Revenues</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        <canvas id="chart" class="chartjs" width="undefined" height="undefined"></canvas>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/3">
+                    <div class="flex flex-col  flex-wrap w-full ">
+                        <div class="px-2 py-5 text-2xl font-medium">Budget</div>
+                        <div class="h-52 ">
+                            <canvas id="chart-doughnut" class="chartjs" width="undefined" height="undefined"></canvas>
+
+                        </div>
+                        <div class="px-2 py-5 text-md font-medium text-center flex space-x-1 ">
+                            <div class="w-1/2">
+                                <p class="text-xl py-1">$35000</p>
+                                <p class="text-gray-500">Monthly Limit</p>
+                            </div>
+                            <div class="w-1/2">
+                                <p class="text-xl py-1">$3000</p>
+                                <p class="text-gray-500">Remaining</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
         <div>
             <h1 class=" mx-10 font-sans font-semibold text-3xl">Categories With Biggest Expense</h1>
@@ -96,7 +139,7 @@
             </svg>
             <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer"></div>
         </div>
-        
+
         <div class="mt-10 mx-6 w-60 h-auto">
             <label for="categories" class="text-gray-600 text-xl pl-2">Categories</label>
             <div class="mt-5 h-auto w-auto flex justify-center pl-1 pr-2 border-b-2">
@@ -104,32 +147,34 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
                 <label for="household" class="text-gray-800 text-md ml-1 pt-1">Household</label>
-                <h5 class="pt-0.5 text-xl ml-24">3K</h5>    
+                <h5 class="pt-0.5 text-xl ml-24">3K</h5>
             </div>
-            
+
             <div class="mt-5 pr-2 pl-1 h-auto w-auto flex border-b-2">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
                 </svg>
                 <label for="Food" class="text-gray-800 text-md pt-1 ml-1">Food</label>
-                <h5 class="pt-0.5 text-xl ml-36">5K</h5>    
+                <h5 class="pt-0.5 text-xl ml-36">5K</h5>
             </div>
             <div class="mt-5 h-auto w-auto flex pl-1 pr-2 border-b-2">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
                 <label for="electricals" class="text-gray-800 text-md ml-1 pt-1">Electricals</label>
-                <h5 class="pt-0.5 text-xl ml-28">2K</h5>    
+                <h5 class="pt-0.5 text-xl ml-28">2K</h5>
             </div>
             <div class="mt-5 pr-2 pl-1 h-auto w-auto flex border-b-2">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                 </svg>
-                    <label for="bills" class="text-gray-800 text-md pt-1 ml-1">Bills</label>
-                <h5 class="pt-0.5 text-xl ml-36">5K</h5>    
+                <label for="bills" class="text-gray-800 text-md pt-1 ml-1">Bills</label>
+                <h5 class="pt-0.5 text-xl ml-36">5K</h5>
             </div>
         </div>
-        <div class="mt-10 w-60 h-40 border-2">calendar</div>
+        <div class="mt-10 w-60 h-40 border-2">
+            <input type="date" data-date-inline-picker="true" />
+        </div>
     </div>
 </div>
 <!-- <div class="container px-5 py-24 mx-auto">
@@ -203,52 +248,84 @@
     </div>
 </div>-->
 
-<!-- <script>
+<script>
     new Chart(document.getElementById("chart"), {
         "type": "bar",
         "data": {
             "labels": ["Jan", "Feb", "Mar", "Apr"],
-            "color" : 'red',
+            "color": 'red',
             "datasets": [{
-                
+
                 "data": [5, 15, 10, 30],
                 "type": "line",
-                "fill": false, 
+                "fill": false,
                 "borderColor": "rgba(99, 102, 241)"
             }]
         },
         "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
             "scales": {
                 "yAxes": [{
                     "ticks": {
                         "beginAtZero": true,
                         "fontColor": "rgba(31, 41, 55)",
-                        "stepSize": 100,   
-                        "display":false,
+                        "stepSize": 100,
+                        "display": false,
 
                     },
                     "gridLines": {
-                        "display":false,
+                        "display": false,
                         "drawBorder": false,
                     }
                 }],
                 "xAxes": [{
                     "ticks": {
                         "fontColor": "rgba(31, 41, 55)",
-                        
+
                     },
-                    
+
                     "gridLines": {
-                        "display":false,
+                        "display": false,
                         "drawBorder": false,
-                        
+
                     }
                 }],
             },
             "legend": {
                 "display": false
             },
-         
+
         }
     });
-</script> -->
+
+    new Chart(document.getElementById("chart-doughnut"), {
+        "type": "doughnut",
+        "data": {
+            "labels": ["Expense", "Budget"],
+            "datasets": [{
+                "label": "Expense",
+                "data": [10, 40],
+                "backgroundColor": [
+                    "rgba(37, 99, 235)",
+                    "rgba(248, 113, 113)",
+                ],
+                // "borderColor": [
+                // "gray",
+                // "gray"
+                // ],
+                // "borderWidth": [2,2]
+            }],
+
+        },
+        "options": {
+            "responsive": true,
+            "maintainAspectRatio": false,
+            "legend": {
+                "display": false
+            },
+
+        }
+
+    });
+</script>
