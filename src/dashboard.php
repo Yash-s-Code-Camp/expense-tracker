@@ -1,15 +1,12 @@
+<?php include "./layouts/top.php";
+if (!isset($_SESSION['email'])) {
+    header("location:login.php");
+}
+?>
 
-<div class=" w-full border-2 flex">
-    <div class="border-2 w-full bg-gray-100">
-        <div>
-            <?php include "./layouts/top.php";
-                if (!isset($_SESSION['email'])) 
-                {
-                    header("location:login.php");
-                }
-            ?>
-        </div>
-        <div class="border-2 m-10 rounded-md bg-white shadow-md w-auto h-auto">
+<div class=" w-full border-2 flex bg-gray-100">
+    <div class="border-r-2 w-full bg-gray-100">
+        <div class=" m-10 rounded-md bg-white shadow-md w-auto h-auto">
             <div class="flex flex-col md:flex-row flex-wrap w-full">
                 <div class="flex flex-col w-full  lg:w-2/3 ">
                     <div class="flex flex-wrap w-full">
@@ -129,7 +126,7 @@
 
         </div>
     </div>
-    <div class="border-2 w-auto flex flex-col justify-start items-center">
+    <div class="border-t-none border-l-4 w-auto flex flex-col justify-start items-center ">
         <div class="ml-36 mx-10 w-30 h-10 mt-12 flex justify-between">
             <svg class="w-6 h-6 text-gray-600 mt-2 mx-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
@@ -173,7 +170,7 @@
                 <h5 class="pt-0.5 text-xl ml-28 ">5K</h5>
             </div>
         </div>
-        
+
         <div class="mt-10 w-60 h-auto mt-10">
             <label for="categories" class="text-gray-800 text-xl font-bold">Calendar</label>
             <input type="date" data-date-inline-picker="true" class="w-60 mt-5" />
