@@ -1,16 +1,12 @@
-<?php
-// include "./layouts/top.php";
-session_start();
-// if (!isset($_SESSION['email'])) 
-// {
-//     header("location:login.php");
-// }
-?>
-
 <div class=" w-full border-2 flex">
     <div class="border-2 w-full bg-gray-100">
         <div>
-            <?php include "./layouts/top.php"; ?>
+            <?php include "./layouts/top.php";
+                if (!isset($_SESSION['email'])) 
+                {
+                    header("location:login.php");
+                }
+            ?>
         </div>
         <div class="border-2 m-10 rounded-md bg-white shadow-md w-auto h-auto">
             <div class="flex flex-col md:flex-row flex-wrap w-full">

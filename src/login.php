@@ -21,7 +21,7 @@
     $res = mysqli_query($conn,$query);
 
     if (mysqli_num_rows($res) > 0) {
-      $_SESSION['email'] = $email;
+      $_SESSION['email'] = $email;     
       header("location: dashboard.php");
     }
     else {
