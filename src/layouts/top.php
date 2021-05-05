@@ -11,16 +11,13 @@
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-  
-  <script src="https://kit.fontawesome.com/43b88d4182.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
 
   <header class="text-gray-600 body-font border-b-2 block md:border-none">
-    <div class="container mx-auto flex flex-wrap p-8 flex-col md:flex-row">
+    <div class="container mx-auto flex flex-wrap py-8 pl-6 pr-4 flex-col md:flex-row">
       <a href="./index.php" class="flex title-font font-medium items-center text-gray-900 mb-0 pl-4 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 5a1 1 0 100 2h1a2 2 0 011.732 1H7a1 1 0 100 2h2.732A2 2 0 018 11H7a1 1 0 00-.707 1.707l3 3a1 1 0 001.414-1.414l-1.483-1.484A4.008 4.008 0 0011.874 10H13a1 1 0 100-2h-1.126a3.976 3.976 0 00-.41-1H13a1 1 0 100-2H7z" clip-rule="evenodd" />
