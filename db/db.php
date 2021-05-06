@@ -6,7 +6,6 @@
     $db = 'expense-tracker';
     $flag = false;
     $conn = mysqli_connect($host,$username,$password);
-
     //selecting databse
     $db_query = "SELECT SCHEMA_NAME  FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$db'";
     $rs = mysqli_query($conn,$db_query);
@@ -23,7 +22,7 @@
 
     if ($flag) {
         // databse file included if database not exists
-        include './db_queries.php';    
+        require_once "../db/db_queries.php";    
     }
     echo mysqli_error($conn);
 

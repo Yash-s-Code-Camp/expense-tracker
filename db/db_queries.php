@@ -1,7 +1,5 @@
 <?php
 
-    include './db.php';
-
     $user_table_query = 
     "CREATE TABLE IF NOT EXISTS `users` (
         `id` int(8) AUTO_INCREMENT PRIMARY KEY,
