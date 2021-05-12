@@ -1,0 +1,13 @@
+1. user personal info in user table, income,budget,
+    (Multiple accounts for single user)
+2. Category add button..
+3. Sort expense by Category
+4. Category form data:
+        name
+        icon
+5. expense form data:
+        title
+        desc
+        Category references category(id)
+        time
+        amt

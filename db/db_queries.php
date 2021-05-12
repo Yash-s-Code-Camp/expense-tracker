@@ -6,6 +6,8 @@
         `full_name` varchar(30) NOT NULL,
         `username` varchar(30) NOT NULL,
         `email` varchar(30) NOT NULL UNIQUE,
+        `gender` varchar(10) NOT NULL,
+        `income` decimal(10,2) not null,
         `password` varchar(30) NOT NULL,
         `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
@@ -13,7 +15,8 @@
    $category_table_query = 
     "CREATE TABLE IF NOT EXISTS `categories` (
         `id` int(8) AUTO_INCREMENT PRIMARY KEY,
-        `name` varchar(30) NOT NULL
+        `name` varchar(30) NOT NULL,
+        `icon` varchar(50) NOT NULL
     )";
     
     $budget_table_query = 
@@ -27,10 +30,12 @@
     $expense_table_query =
     "CREATE TABLE IF NOT EXISTS `expense` (
         `id` int(8) AUTO_INCREMENT PRIMARY KEY,
+        `title` varchar(255) NOT NULL,
         `budget_id` int(8) REFERENCES `budget`(`id`), 
         `category_id` int(8) REFERENCES `categories`(`id`), 
         `expense` decimal(10,2) NOT NULL,
-        `date` date  NOT NULL       
+        `date` date  NOT NULL,
+        `description` varchar(255) NOT NULL   
     )";     // user_id (R, 1 - 2 - M ) 
             // budget_id (R, M - 2 - M)
             // category_id (R, M - 2 - M)

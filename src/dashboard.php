@@ -2,9 +2,19 @@
 if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
+
+    if (isset($_POST['add_expense'])) {
+        $title = $_POST['expense_title'];
+        $amount = $_POST['amount'];
+        $category = $_POST['caategory'];
+        $desc = $_POST['description'];
+
+        //$query = "INSERT INTO"
+    }
+
 ?>
 
-<div class=" w-full border-2 flex bg-gray-100">
+<div class=" w-full border-2 flex bg-gray-100 relative">
     <div class="border-r-2 w-full bg-gray-100">
         <div class=" m-10 rounded-md bg-white shadow-md w-auto h-auto">
             <div class="flex flex-col md:flex-row flex-wrap w-full">
@@ -53,9 +63,15 @@ if (!isset($_SESSION['email'])) {
             </div>
 
         </div>
-        <div>
+
+        <div class="flex  w-full justify-between">
             <h1 class=" mx-10 font-sans font-semibold text-3xl">Categories With Biggest Expense</h1>
+            <button type="button" class="bg-indigo-500 py-2 px-4 text-white text-semibold rounded-md my-2 mx-10" id="btnAddExpense" onclick="openModal()">Add Expense</button>
         </div>
+
+
+
+
         <div class="m-10 flex flex-wrap justify-between">
             <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
                 <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
@@ -170,13 +186,76 @@ if (!isset($_SESSION['email'])) {
                 <h5 class="pt-0.5 text-xl ml-28 ">5K</h5>
             </div>
         </div>
+        <div class="mt-5 h-auto w-auto flex pl-1 pr-2 border-b-2">
+            <a href="./add_category.php" class="bg-indigo-500 text-white w-full py-2 px-3 rounded-md">Add Category</a href="./add_category.php">
+        </div>
 
-        <div class="mt-10 w-60 h-auto mt-10">
+        <div class="w-60 h-auto mt-10">
             <label for="categories" class="text-gray-800 text-xl font-bold">Calendar</label>
             <input type="date" data-date-inline-picker="true" class="w-60 mt-5" />
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="add_expense_modal" class="w-full h-full flex justify-center items-center z-10 bg-gray-50 absolute bg-opacity-70  hidden  top-0 left-0">
+        <div class="bg-gray-300 relative">
+            <form action="#" method="post">
+                <div class=" flex flex-col  justify-center items-center space-y-4 opacity-100">
+                    <div class="  bg-gray-100 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">
+                        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add Expense</h2>
+
+                        
+
+                        <div class="flex relative mb-4 space-x-2">
+                        <div class="relative mb-4 w-1/2">
+                            <label for="expense_title" class="leading-7 text-sm text-gray-600">Expense Title</label>
+                            <input type="text" id="expense_title" name="expense_title" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                        </div>
+                            <div class="relative mb-4 w-1/2">
+                                <label for="category" class="leading-7 text-sm text-gray-600">Category</label>
+                                <input type="text" id="category" name="category" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                            </div>  
+
+                        </div>
+
+                        <div class="flex relative mb-4 space-x-2">
+                            <div class="relative mb-4 w-1/2">
+                                <label for="date" class="leading-7 text-sm text-gray-600">Date</label>
+                                <input type="date" id="date" name="date" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                            </div>
+                            <div class="relative mb-4 w-1/2">
+                                <label for="amount" class="leading-7 text-sm text-gray-600">Amount</label>
+                                <input type="number" id="amount" name="amount" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                            </div>
+
+                        </div>
+
+                        <div class="relative mb-4">
+                            <label for="description" class="leading-7 text-sm text-gray-600">Description</label>
+                            <input type="text" id="description" name="description" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                        </div>
+
+                        <button type="submit" name="add_expense" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">ADD</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+
+<script>
+    //const btnAddExpense = document.querySelector("#btnAddExpense") 
+
+    let openModal = ()=>{
+        let modal = document.querySelector("#add_expense_modal")
+        modal.classList.remove("hidden")
+    }
+
+</script>
+
 
 <script>
     new Chart(document.getElementById("chart"), {
