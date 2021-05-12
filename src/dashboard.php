@@ -2,14 +2,28 @@
 if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
-
+    include "../db/db.php";
+    $sql = "SELECT * FROM `categories`";
+    $res = mysqli_query($conn,$sql);
+    $categories = array();
+    while($row = mysqli_fetch_row($res)){
+        array_push($categories,$row);
+    }
     if (isset($_POST['add_expense'])) {
         $title = $_POST['expense_title'];
         $amount = $_POST['amount'];
-        $category = $_POST['caategory'];
+        $category = $_POST['category'];
         $desc = $_POST['description'];
+        $date = $_POST['date'];
 
-        //$query = "INSERT INTO"
+        $query = "INSERT INTO `expense` (`title`,`category_id`,`expense`,`date`,`description`) VALUES('$title','$category',$amount,'$date','$desc')";
+
+        if (mysqli_query($conn,$query)) {
+            echo "<script>alert('Expense added.'); window.location='dashboard.php';</script>";
+        }else{
+            echo "<script>alert('Error while adding expense.');</script>";
+        }
+        mysqli_error($conn);
     }
 
 ?>
@@ -195,7 +209,7 @@ if (!isset($_SESSION['email'])) {
             <input type="date" data-date-inline-picker="true" class="w-60 mt-5" />
         </div>
     </div>
-
+    
     <!-- Modal -->
     <div id="add_expense_modal" class="w-full h-full flex justify-center items-center z-10 bg-gray-50 absolute bg-opacity-70  hidden  top-0 left-0">
         <div class="bg-gray-300 relative">
@@ -213,7 +227,18 @@ if (!isset($_SESSION['email'])) {
                         </div>
                             <div class="relative mb-4 w-1/2">
                                 <label for="category" class="leading-7 text-sm text-gray-600">Category</label>
-                                <input type="text" id="category" name="category" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                                <select name="category" id="category" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                                    <option value="0">Select Category</option>
+                                    <?php
+                                        for ($i=0; $i < count($categories); $i++) { 
+                                            $id = $categories[$i][0];
+                                            $name = $categories[$i][1];
+                                            echo "<option value='$id' >$name</option>";
+                                        }                                    
+                                    
+                                    ?>
+                                
+                                </select>
                             </div>  
 
                         </div>
