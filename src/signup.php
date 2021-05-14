@@ -11,6 +11,7 @@ if (isset($_SESSION['email'])) {
 if (isset($_POST['signup'])) {
   $full_name = $_POST['fullname'];
   $email = $_POST['email'];
+  $income = $_POST['income'];
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
 
@@ -27,7 +28,7 @@ if (isset($_POST['signup'])) {
       return;
     }
 
-    $query = "INSERT INTO `users`(`full_name`,`email`,`password`) VALUES('$full_name','$email','$password')";
+    $query = "INSERT INTO `users`(`full_name`,`email`,`income`,`password`) VALUES('$full_name','$email',$income,'$password')";
     $res = mysqli_query($conn, $query);
 
 
@@ -56,6 +57,10 @@ if (isset($_POST['signup'])) {
       <div class="relative mb-4">
         <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
         <input type="email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+      </div>
+      <div class="relative mb-4">
+        <label for="text" class="leading-7 text-sm text-gray-600">Income</label>
+        <input type="text" id="income" name="income" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" autofocus required>
       </div>
       <div class="relative mb-4">
         <label for="password" class="leading-7 text-sm text-gray-600">Password</label>

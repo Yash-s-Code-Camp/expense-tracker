@@ -11,3 +11,10 @@
         Category references category(id)
         time
         amt
+
+
+
+TODO:
+
+1. registration form
+2. budget
