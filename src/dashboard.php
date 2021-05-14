@@ -201,14 +201,19 @@ if (isset($_POST['add_expense'])) {
     </div>
 
     <!-- Modal -->
-    <div id="add_expense_modal" class="w-full h-full flex justify-center items-center z-10 bg-gray-50 absolute bg-opacity-70  hidden  top-0 left-0">
+    <div id="add_expense_modal" class="w-full h-full flex justify-center items-center z-10 bg-gray-50 absolute bg-opacity-70  hidden  top-0 left-0 ">
         <div class="bg-gray-300 relative">
-            <form action="#" method="post">
+            <form action="#" method="post" id="add-expense-form">
                 <div class=" flex flex-col  justify-center items-center space-y-4 opacity-100">
                     <div class="  bg-gray-100 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">
-                        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add Expense</h2>
-
-
+                       <div class="flex justify-between w-full">
+                            <div>
+                                <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add Expense</h2>
+                            </div>
+                            <div class="px-5 text-left text-gray-700" >
+                                <span id="btn-close" class="cursor-pointer"><i class="fa fa-times text-3xl"></i></span>
+                            </div>
+                       </div>
 
                         <div class="flex relative mb-4 space-x-2">
                             <div class="relative mb-4 w-1/2">
@@ -262,10 +267,14 @@ if (isset($_POST['add_expense'])) {
 
 
 <script>
-    //const btnAddExpense = document.querySelector("#btnAddExpense") 
+    let modal = document.querySelector("#add_expense_modal")
+    const close = document.querySelector("#btn-close") 
 
+    close.addEventListener("click", ()=>{
+        modal.classList.add('hidden')
+        document.getElementById("add-expense-form").reset()
+    })
     let openModal = () => {
-        let modal = document.querySelector("#add_expense_modal")
         modal.classList.remove("hidden")
     }
 </script>
