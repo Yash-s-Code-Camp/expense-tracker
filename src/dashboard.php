@@ -6,6 +6,7 @@ include "../db/db.php";
 $sql = "SELECT * FROM `categories`";
 $res = mysqli_query($conn, $sql);
 $categories = array();
+// $icons = array("fa-home","fa-utensils","fa-bolt","fa-file-invoice");
 while ($row = mysqli_fetch_row($res)) {
     array_push($categories, $row);
 }
@@ -83,76 +84,32 @@ if (isset($_POST['add_expense'])) {
             <button type="button" class="bg-indigo-500 py-2 px-4 text-white text-semibold rounded-md my-2 mx-10" id="btnAddExpense" onclick="openModal()">Add Expense</button>
         </div>
 
+        <div class="m-10 flex flex-wrap justify-start">
+            <?php  
+                $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id`";
+                $result = mysqli_query($conn,$str);
 
+                while($row = mysqli_fetch_array($result))
+                {
 
+            ?>
 
-        <div class="m-10 flex flex-wrap justify-between">
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-shopping-basket text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Shopping Cost
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 1200
-                </div>
-            </div>
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-tshirt text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Cloths
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 2500
-                </div>
-            </div>
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-camera text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Color Camera
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 3500
-                </div>
-            </div>
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-home text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Home Loan
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 3000
-                </div>
-            </div>
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-gifts text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Birthday Gift
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 1200
-                </div>
-            </div>
-            <div class="rounded-md w-36 flex flex-col my-3 bg-gray-50 shadow-lg ">
-                <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                    <i class="fa fa-truck text-5xl"></i>
-                </div>
-                <div class="px-5 text-sm text-gray-400">
-                    Pickup Loan
-                </div>
-                <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                    $ 4500
-                </div>
-            </div>
+                    <div class="rounded-md w-36 flex flex-col my-3 mx-4 bg-gray-50 shadow-lg ">
+                        <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
+                            <i class="fa <?php echo $row['icon'];?> text-5xl"></i>
+                        </div>
+                        <div class="px-5 text-sm text-gray-400">
+                            <?php echo $row['title']; ?>
+                        </div>
+                        <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                            ₹ <?php echo $row['expense']; ?>
+                        </div>
+                    </div>
+
+            <?php
+                }
+            
+            ?>
 
         </div>
     </div>
@@ -164,27 +121,39 @@ if (isset($_POST['add_expense'])) {
             <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer"></div>
         </div>
 
-        <div class="mt-10 mx-6 w-60 h-auto">
+        <div class="mt-10 mx-8 w-72 h-auto">
             <label for="categories" class="text-gray-800 text-xl font-bold pl-2">Categories</label>
 
             <?php
-            for ($i = 0; $i < count($categories); $i++) {
-                $id = $categories[$i][0];
-                $name = $categories[$i][1];
-                $icon = $categories[$i][2];
-
+            // for ($i = 0; $i < count($categories); $i++) {
+            //     $id = $categories[$i][0];
+            //     $name = $categories[$i][1];
+            //     $icon = $categories[$i][2];
+                   
                 //echo "<option value='$id' >$name</option>";
+                $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e ON `c`.`id` = `e`.`category_id` GROUP BY `e`.`category_id`";
+                $result = mysqli_query($conn,$str);
+
+                
+
+                while($row = mysqli_fetch_array($result))
+                {
+                    
             ?>
 
-                <div class="mt-5 h-auto w-full flex justify-start items-center pl-1 pr-2 border-b-2">
-                    <!-- <i class="fas <?= $test ?> fa-lg text-gray-700 px-4 py-3 mb-2 ml-1 mr-2 text-center"></i> -->
-                
-                    <img src="../upload/<?= $icon ?>" class="w-1/5 h-10  my-2"  alt="category icon">
-                    <label for="Food" class="text-gray-800 text-md pt-1 ml-3 w-3/5"><?= $name ?></label>
-                    <h5 class="pt-0.5 text-xl  w-1/5 pl-2">5K</h5>
-                </div>
+                    <div class="mt-5 h-auto w-full flex justify-between items-center pl-1 pr-2 border-b-2">
+                        <div class="w-2/5 flex justify-between items-center">
+                            <i class="fas <?php echo $row['icon']; ?> fa-lg text-gray-700 py-3 mb-2 text-center"></i>
+                        
+                            <label for="name" class="text-gray-800 text-md w-2/5"><?php echo $row['name']; ?></label>
+                        </div>
+                    
+
+                        <h5 class="pt-0.5 text-xl text-right font-semibold w-2/5">₹ <?= ($row['total'] == null) ? '0' : $row['total'];?></h5>
+                    </div>
 
             <?php
+                   
             }
             ?>
 
