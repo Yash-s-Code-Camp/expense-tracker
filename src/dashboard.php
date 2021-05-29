@@ -10,6 +10,7 @@ $categories = array();
 while ($row = mysqli_fetch_row($res)) {
     array_push($categories, $row);
 }
+
 if (isset($_POST['add_expense'])) {
     $title = $_POST['expense_title'];
     $amount = $_POST['amount'];
@@ -48,7 +49,7 @@ if (isset($_POST['add_expense'])) {
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
                             <p class="font-semibold text-2xl p-2">$ 12000</p>
-                            <p class="text-green-600 font-semibold p-2">Revenues</p>
+                            <p class="text-green-600 font-semibold p-2">Budget</p>
                         </div>
                     </div>
                     <div class="">
@@ -85,30 +86,29 @@ if (isset($_POST['add_expense'])) {
         </div>
 
         <div class="m-10 flex flex-wrap justify-start">
-            <?php  
-                $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id`";
-                $result = mysqli_query($conn,$str);
+            <?php
+            $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id`";
+            $result = mysqli_query($conn, $str);
 
-                while($row = mysqli_fetch_array($result))
-                {
+            while ($row = mysqli_fetch_array($result)) {
 
             ?>
 
-                    <div class="rounded-md w-36 flex flex-col my-3 mx-4 bg-gray-50 shadow-lg ">
-                        <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
-                            <i class="fa <?php echo $row['icon'];?> text-5xl"></i>
-                        </div>
-                        <div class="px-5 text-sm text-gray-400">
-                            <?php echo $row['title']; ?>
-                        </div>
-                        <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
-                            ₹ <?php echo $row['expense']; ?>
-                        </div>
+                <div class="rounded-md w-36 flex flex-col my-3 mx-4 bg-gray-50 shadow-lg ">
+                    <div class="h-20 w-full px-5 pt-3 text-left text-gray-700">
+                        <i class="fa <?php echo $row['icon']; ?> text-5xl"></i>
                     </div>
+                    <div class="px-5 text-sm text-gray-400">
+                        <?php echo $row['title']; ?>
+                    </div>
+                    <div class="px-5 pb-3 text-lg text-gray-500 font-semibold">
+                        ₹ <?php echo $row['expense']; ?>
+                    </div>
+                </div>
 
             <?php
-                }
-            
+            }
+
             ?>
 
         </div>
@@ -118,7 +118,18 @@ if (isset($_POST['add_expense'])) {
             <svg class="w-6 h-6 text-gray-600 mt-2 mx-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer"></div>
+            <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer" onclick="toggleDD('myDropdown')" ></div>
+            <div class="relative inline-block">
+                <button  class="drop-button text-white focus:outline-none"> <span class="pr-2"><i class="em em-robot_face"></i></span><svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg></button>
+                <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 ml-3 mt-5 p-3 overflow-auto z-30 invisible w-32">
+                    <a href="./profile.php" class="p-2  hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Profile</a>
+                    <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                    <div class="border border-gray-800"></div>
+                   
+                </div>
+            </div>
         </div>
 
         <div class="mt-10 mx-8 w-72 h-auto">
@@ -129,31 +140,30 @@ if (isset($_POST['add_expense'])) {
             //     $id = $categories[$i][0];
             //     $name = $categories[$i][1];
             //     $icon = $categories[$i][2];
-                   
-                //echo "<option value='$id' >$name</option>";
-                $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e ON `c`.`id` = `e`.`category_id` GROUP BY `e`.`category_id`";
-                $result = mysqli_query($conn,$str);
 
-                
+            //echo "<option value='$id' >$name</option>";
+            $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e ON `c`.`id` = `e`.`category_id` GROUP BY `e`.`category_id`";
+            $result = mysqli_query($conn, $str);
 
-                while($row = mysqli_fetch_array($result))
-                {
-                    
+
+
+            while ($row = mysqli_fetch_array($result)) {
+
             ?>
 
-                    <div class="mt-5 h-auto w-full flex justify-between items-center pl-1 pr-2 border-b-2">
-                        <div class="w-2/5 flex justify-between items-center">
-                            <i class="fas <?php echo $row['icon']; ?> fa-lg text-gray-700 py-3 mb-2 text-center"></i>
-                        
-                            <label for="name" class="text-gray-800 text-md w-2/5"><?php echo $row['name']; ?></label>
-                        </div>
-                    
+                <div class="mt-5 h-auto w-full flex justify-between items-center pl-1 pr-2 border-b-2">
+                    <div class="w-2/5 flex justify-between items-center">
+                        <i class="fas <?php echo $row['icon']; ?> fa-lg text-gray-700 py-3 mb-2 text-center"></i>
 
-                        <h5 class="pt-0.5 text-xl text-right font-semibold w-2/5">₹ <?= ($row['total'] == null) ? '0' : $row['total'];?></h5>
+                        <label for="name" class="text-gray-800 text-md w-2/5"><?php echo $row['name']; ?></label>
                     </div>
 
+
+                    <h5 class="pt-0.5 text-xl text-right font-semibold w-2/5">₹ <?= ($row['total'] == null) ? '0' : $row['total']; ?></h5>
+                </div>
+
             <?php
-                   
+
             }
             ?>
 
@@ -175,14 +185,14 @@ if (isset($_POST['add_expense'])) {
             <form action="#" method="post" id="add-expense-form">
                 <div class=" flex flex-col  justify-center items-center space-y-4 opacity-100">
                     <div class="  bg-gray-100 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">
-                       <div class="flex justify-between w-full">
+                        <div class="flex justify-between w-full">
                             <div>
                                 <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Add Expense</h2>
                             </div>
-                            <div class="px-5 text-left text-gray-700" >
+                            <div class="px-5 text-left text-gray-700">
                                 <span id="btn-close" class="cursor-pointer"><i class="fa fa-times text-3xl"></i></span>
                             </div>
-                       </div>
+                        </div>
 
                         <div class="flex relative mb-4 space-x-2">
                             <div class="relative mb-4 w-1/2">
@@ -236,10 +246,14 @@ if (isset($_POST['add_expense'])) {
 
 
 <script>
-    let modal = document.querySelector("#add_expense_modal")
-    const close = document.querySelector("#btn-close") 
+    function toggleDD(myDropMenu) {
+        document.getElementById(myDropMenu).classList.toggle("invisible");
+    }
 
-    close.addEventListener("click", ()=>{
+    let modal = document.querySelector("#add_expense_modal")
+    const close = document.querySelector("#btn-close")
+
+    close.addEventListener("click", () => {
         modal.classList.add('hidden')
         document.getElementById("add-expense-form").reset()
     })
