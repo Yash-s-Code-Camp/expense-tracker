@@ -16,8 +16,8 @@ if (isset($_POST['add_category'])) {
   // } else {
   //   $err = "File Not Selected";
   // }
-
-  $sql = "INSERT INTO `categories` (`name`,`icon`) VALUES ('$title','$icons')";
+  $userId = $_SESSION['userId'];
+  $sql = "INSERT INTO `categories` (`name`,`icon`,`user_id`) VALUES ('$title','$icons',$userId)";
   if (mysqli_query($conn,$sql)) {
     $msg = "Category Added.";
     header("location: dashboard.php");

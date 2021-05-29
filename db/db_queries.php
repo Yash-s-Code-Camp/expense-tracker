@@ -16,7 +16,8 @@
     "CREATE TABLE IF NOT EXISTS `categories` (
         `id` int(8) AUTO_INCREMENT PRIMARY KEY,
         `name` varchar(30) NOT NULL,
-        `icon` varchar(50) NOT NULL
+        `icon` varchar(50) NOT NULL,
+        `user_id` int(8) REFERENCES `users`(`id`)
     )";
     
     $budget_table_query = 
