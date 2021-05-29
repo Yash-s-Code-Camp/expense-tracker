@@ -34,6 +34,7 @@ if (isset($_POST['signup'])) {
 
     if ($res) {
       $_SESSION['email'] = $email;
+      $_SESSION['userId'] = mysqli_insert_id($conn);
       header("location: dashboard.php");
     } else {
       echo mysqli_error($conn);
