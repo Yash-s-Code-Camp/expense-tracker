@@ -31,13 +31,12 @@
     "CREATE TABLE IF NOT EXISTS `expense` (
         `id` int(8) AUTO_INCREMENT PRIMARY KEY,
         `title` varchar(255) NOT NULL,
-        `budget_id` int(8) REFERENCES `budget`(`id`), 
+        `user_id` int(8) REFERENCES `users`(`id`), 
         `category_id` int(8) REFERENCES `categories`(`id`), 
         `expense` decimal(10,2) NOT NULL,
         `date` date  NOT NULL,
         `description` varchar(255) NOT NULL   
     )";     // user_id (R, 1 - 2 - M ) 
-            // budget_id (R, M - 2 - M)
             // category_id (R, M - 2 - M)
 
     if (!mysqli_query($conn, $user_table_query)) {

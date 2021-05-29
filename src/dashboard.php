@@ -13,18 +13,32 @@ while ($row = mysqli_fetch_row($res)) {
 
 if (isset($_POST['add_expense'])) {
     $title = $_POST['expense_title'];
+    $userId = $_SESSION['userId'];
     $amount = $_POST['amount'];
     $category = $_POST['category'];
     $desc = $_POST['description'];
     $date = $_POST['date'];
 
-    $query = "INSERT INTO `expense` (`title`,`category_id`,`expense`,`date`,`description`) VALUES('$title','$category',$amount,'$date','$desc')";
+    $query = "INSERT INTO `expense` (`title`,`user_id`,`category_id`,`expense`,`date`,`description`) VALUES('$title',$userId,'$category',$amount,'$date','$desc')";
 
     if (mysqli_query($conn, $query)) {
         echo "<script>alert('Expense added.'); window.location='dashboard.php';</script>";
     } else {
         echo "<script>alert('Error while adding expense.');</script>";
     }
+    mysqli_error($conn);
+}
+
+$query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b,`expense` as e, `users` as u where u.id = b.user_id and u.id = e.user_id";
+$res = mysqli_query($conn,$query);
+
+if (mysqli_num_rows($res) > 0) {
+    $data = mysqli_fetch_array($res);
+    $remaining_budget = number_format((float)($data['total_budget'] - $data['expense']), 2, '.', '') ;
+    
+    $piechart_data = "[".$data['expense']." , $remaining_budget]";
+}
+else{
     mysqli_error($conn);
 }
 
@@ -38,17 +52,17 @@ if (isset($_POST['add_expense'])) {
                     <div class="flex flex-wrap w-full">
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-red-600 p-4 "></i>
-                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= $data['expense'] ?></p>
                             <p class="text-red-600 font-semibold p-2">Expenses</p>
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-donate fa-lg w-full text-blue-600 p-4"></i>
-                            <p class="font-semibold text-2xl text-2x p-2">$ 12000</p>
+                            <p class="font-semibold text-2xl text-2x p-2">₹ 12000</p>
                             <p class="text-blue-600 font-semibold p-2">Expenses & Revenues</p>
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
-                            <p class="font-semibold text-2xl p-2">$ 12000</p>
+                            <p class="font-semibold text-2xl p-2">₹ <?= $data['total_budget'] ?></p>
                             <p class="text-green-600 font-semibold p-2">Budget</p>
                         </div>
                     </div>
@@ -65,11 +79,11 @@ if (isset($_POST['add_expense'])) {
                         </div>
                         <div class="px-2 py-5 text-md font-medium text-center flex space-x-1 ">
                             <div class="w-1/2">
-                                <p class="text-xl py-1">$35000</p>
+                                <p class="text-xl py-1">₹ <?= $data['total_budget'] ?></p>
                                 <p class="text-gray-500">Monthly Limit</p>
                             </div>
                             <div class="w-1/2">
-                                <p class="text-xl py-1">$3000</p>
+                                <p class="text-xl py-1">₹ <?= $remaining_budget ?></p>
                                 <p class="text-gray-500">Remaining</p>
                             </div>
                         </div>
@@ -118,7 +132,9 @@ if (isset($_POST['add_expense'])) {
             <svg class="w-6 h-6 text-gray-600 mt-2 mx-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
-            <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer" onclick="toggleDD('myDropdown')" ></div>
+            <div class="border-2 w-10 h-10 rounded-3xl bg-indigo-500 cursor-pointer" onclick="toggleDD('myDropdown')" >
+            <!-- <i class="fa fa-user fa-fw fa-x"></i> -->
+            </div>
             <div class="relative inline-block">
                 <button  class="drop-button text-white focus:outline-none"> <span class="pr-2"><i class="em em-robot_face"></i></span><svg class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -317,13 +333,13 @@ if (isset($_POST['add_expense'])) {
     new Chart(document.getElementById("chart-doughnut"), {
         "type": "doughnut",
         "data": {
-            "labels": ["Expense", "Budget"],
+            "labels": ["Expense", "Remaining Budget"],
             "datasets": [{
                 "label": "Expense",
-                "data": [10, 40],
+                "data": <?=$piechart_data?>,
                 "backgroundColor": [
-                    "rgba(37, 99, 235)",
                     "rgba(248, 113, 113)",
+                    "rgba(37, 99, 235)",
                 ],
                 // "borderColor": [
                 // "gray",

@@ -8,7 +8,7 @@ if (!isset($_SESSION['email'])) {
 }
 ?>
 <?php
-    $query = "SELECT * FROM `users` where `email` = '".$_SESSION['email'] ."'";
+    $query = "SELECT * FROM `users` as u,`budget` as b where u.id = b.user_id and `email` = '".$_SESSION['email'] ."'";
     $res = mysqli_query($conn,$query);
     
     if (mysqli_num_rows($res) > 0) {
@@ -25,8 +25,9 @@ if (!isset($_SESSION['email'])) {
         $name = $_POST['fullname'];
         $income = $_POST['income'];
         $email = $_POST['email'];
+        $budget = $_POST['budget'];
 
-        $query = "UPDATE `users` set `full_name`= '$name' , `income`= '$income' where `email` = '$email'";
+        $query = "UPDATE `users` as u,`budget` as b set `full_name`= '$name' , `income`= '$income', `total_budget` = $budget where u.id = b.user_id and `email` = '$email';";
         $res = mysqli_query($conn,$query);
         
         if ($res) {
@@ -36,7 +37,7 @@ if (!isset($_SESSION['email'])) {
 ?>
 
 <form action="#" method="post">
-  <div class=" flex flex-col px-24 lg:px-64  py-24 justify-center items-center space-y-4">
+  <div class=" flex flex-col px-24 lg:px-64  py-10 justify-center items-center space-y-4">
     <div class="lg:w-3/6  bg-gray-100 rounded-lg p-8 flex flex-col  mt-10 md:mt-0">
       <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Profile</h2>
 
@@ -51,6 +52,10 @@ if (!isset($_SESSION['email'])) {
       <div class="relative mb-4">
         <label for="text" class="leading-7 text-sm text-gray-600">Income</label>
         <input type="text" id="income" name="income" value="<?= $data['income']?>" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" autofocus required>
+      </div>
+      <div class="relative mb-4">
+        <label for="text" class="leading-7 text-sm text-gray-600">Budget</label>
+        <input type="text" id="budget" name="budget" value="<?= $data['total_budget'] ?>" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" autofocus required>
       </div>
       
       <button type="submit" name="update" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Update Profile</button>
