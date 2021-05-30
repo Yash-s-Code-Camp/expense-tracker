@@ -3,7 +3,11 @@ if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
 include "../db/db.php";
-$sql = "SELECT * FROM `categories`";
+
+$userId = $_SESSION['userId'];
+
+
+$sql = "SELECT * FROM `categories` where `user_id` = ". $_SESSION['userId'];
 $res = mysqli_query($conn, $sql);
 $categories = array();
 // $icons = array("fa-home","fa-utensils","fa-bolt","fa-file-invoice");
@@ -13,7 +17,6 @@ while ($row = mysqli_fetch_row($res)) {
 
 if (isset($_POST['add_expense'])) {
     $title = $_POST['expense_title'];
-    $userId = $_SESSION['userId'];
     $amount = $_POST['amount'];
     $category = $_POST['category'];
     $desc = $_POST['description'];
@@ -30,13 +33,14 @@ if (isset($_POST['add_expense'])) {
     
 }
 
-$query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b,`expense` as e, `users` as u where u.id = b.user_id and u.id = e.user_id";
+$query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b LEFT JOIN `expense` as e ON b.user_id = e.user_id and b.user_id = ".$_SESSION['userId'];
 $res = mysqli_query($conn,$query);
 
 if (mysqli_num_rows($res) > 0) {
-    $data = mysqli_fetch_array($res);
+    $data = mysqli_fetch_assoc($res);
     $remaining_budget = number_format((float)($data['total_budget'] - $data['expense']), 2, '.', '') ;
-    
+    // print_r($data);
+    // echo $_SESSION['userId'];
     $piechart_data = "[".$data['expense']." , $remaining_budget]";
 }
 else{
@@ -53,7 +57,7 @@ else{
                     <div class="flex flex-wrap w-full">
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-red-600 p-4 "></i>
-                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= $data['expense'] ?></p>
+                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= isset($data['expense']) ? $data['expense'] : 0 ?></p>
                             <p class="text-red-600 font-semibold p-2">Expenses</p>
                         </div>
                         <div class="w-1/3 p-5 text-center">
@@ -102,7 +106,7 @@ else{
 
         <div class="m-10 flex flex-wrap justify-start">
             <?php
-            $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id`";
+            $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id` and c.user_id = $userId";
             $result = mysqli_query($conn, $str);
 
             while ($row = mysqli_fetch_array($result)) {
@@ -159,13 +163,12 @@ else{
             //     $icon = $categories[$i][2];
 
             //echo "<option value='$id' >$name</option>";
-            $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e ON `c`.`id` = `e`.`category_id` GROUP BY `e`.`category_id`";
+            $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e on `c`.`id` = `e`.`category_id` where c.user_id = $userId group by c.id";
             $result = mysqli_query($conn, $str);
 
-
-
-            while ($row = mysqli_fetch_array($result)) {
-
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+            
             ?>
 
                 <div class="mt-5 h-auto w-full flex justify-between items-center pl-1 pr-2 border-b-2">
