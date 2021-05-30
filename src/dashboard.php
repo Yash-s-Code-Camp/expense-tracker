@@ -12,15 +12,20 @@ if (isset($_POST['add_expense'])) {
     $category = $_POST['category'];
     $desc = $_POST['description'];
     $date = $_POST['date'];
+    $today_dt = date("d m Y");
 
-    $query = "INSERT INTO `expense` (`title`,`user_id`,`category_id`,`expense`,`date`,`description`) VALUES('$title',$userId,'$category',$amount,'$date','$desc')";
-
-    if (mysqli_query($conn, $query)) {
+    if ($date < $today_dt) 
+    {
+        $query = "INSERT INTO `expense` (`title`,`user_id`,`category_id`,`expense`,`date`,`description`) VALUES('$title',$userId,'$category',$amount,'$date','$desc')";
+        $result = mysqli_query($conn, $query);
         echo "<script>alert('Expense added.'); window.location='dashboard.php';</script>";
-    } else {
-        echo "<script>alert('Error while adding expense.');</script>";
+    } 
+    else 
+    {
+        echo "<script>alert('Error while adding expense. Please select date that is less than todays date.');</script>";
         $e = mysqli_error($conn);
     }
+
 }
 $current_month = date('m');
 // $current_month = 6;
@@ -28,16 +33,28 @@ $current_month = date('m');
 $query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b LEFT JOIN `expense` as e ON b.user_id = e.user_id and month(date) =  $current_month  and b.user_id = " . $_SESSION['userId'];
 $res = mysqli_query($conn, $query);
 
-if (mysqli_num_rows($res) > 0) {
+if (mysqli_num_rows($res) > 0) 
+{
     $data = mysqli_fetch_assoc($res);
     $remaining_budget = number_format((float)($data['total_budget'] - $data['expense']), 2, '.', '');
     // print_r($data);
     // echo $_SESSION['userId'];
-    $piechart_data = "[" . $data['expense'] . " , $remaining_budget]";
-} else {
+    $piechart_data = "[".$data['expense']." , $remaining_budget]";
+}
+else
+{
     mysqli_error($conn);
 }
 
+?>
+
+<?php 
+    $str="SELECT `income` FROM `users` WHERE `email` = '".$_SESSION['email']."'"; 
+    $result = mysqli_query($conn,$str); 
+    $row = mysqli_fetch_array($result);
+
+    $savings = $row['income'] - $data['total_budget'];
+    $net_savings = $savings + $remaining_budget;
 ?>
 
 <div class=" w-full border-2 flex bg-gray-100 relative">
@@ -53,8 +70,8 @@ if (mysqli_num_rows($res) > 0) {
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-donate fa-lg w-full text-blue-600 p-4"></i>
-                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= $remaining_budget ?></p>
-                            <p class="text-blue-600 font-semibold p-2">Revenues</p>
+                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= $net_savings ?></p>
+                            <p class="text-blue-600 font-semibold p-2">Savings</p>
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
@@ -75,12 +92,12 @@ if (mysqli_num_rows($res) > 0) {
                         </div>
                         <div class="px-2 py-5 text-md font-medium text-center flex space-x-1 ">
                             <div class="w-1/2">
-                                <p class="text-xl py-1">₹ <?= $data['total_budget'] ?></p>
-                                <p class="text-gray-500">Monthly Limit</p>
+                                <p class="text-xl py-1">₹ <?= $row['income']; ?></p>
+                                <p class="text-gray-500">Monthly Income</p>
                             </div>
                             <div class="w-1/2">
                                 <p class="text-xl py-1">₹ <?= $remaining_budget ?></p>
-                                <p class="text-gray-500">Remaining</p>
+                                <p class="text-gray-500">Remaining Budget</p>
                             </div>
                         </div>
                     </div>
@@ -135,8 +152,8 @@ if (mysqli_num_rows($res) > 0) {
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg></button>
                 <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 ml-3 mt-5 p-3 overflow-auto z-30 invisible w-32">
-                    <a href="./profile.php" class="p-2  hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Profile</a>
-                    <a href="#" class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                    <a href="./profile.php" class="p-2  bg-gray-800 hover:bg-gray-500 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-user fa-fw"></i> Profile</a>
+                    <a href="#" class="p-2 bg-gray-800 hover:bg-gray-500 text-white text-sm no-underline hover:no-underline block"><i class="fa fa-cog fa-fw"></i> Settings</a>
                     <div class="border border-gray-800"></div>
 
                 </div>
