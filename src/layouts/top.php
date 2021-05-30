@@ -68,7 +68,7 @@
           <?php
             if (isset($_SESSION['email'])) {
           ?>
-          <a href="./logout.php?logout=true" class="flex flex-col text-center bg-red-500 text-gray-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-red-50 rounded text-base mt-4 md:mt-0 uppercase">Logout</a>
+          <a href="./logout.php?logout=true" class="flex flex-col text-center bg-red-400 text-gray-50 border-0 py-1 px-3 focus:outline-none hover:animate-pulse hover:text-red-50 rounded text-base mt-4 md:mt-0 uppercase">Logout</a>
           <?php
             }
             else{
