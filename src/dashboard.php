@@ -25,8 +25,9 @@ if (isset($_POST['add_expense'])) {
         echo "<script>alert('Expense added.'); window.location='dashboard.php';</script>";
     } else {
         echo "<script>alert('Error while adding expense.');</script>";
+        $e = mysqli_error($conn);
     }
-    mysqli_error($conn);
+    
 }
 
 $query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b,`expense` as e, `users` as u where u.id = b.user_id and u.id = e.user_id";
@@ -190,8 +191,10 @@ else{
         </div>
 
         <div class="w-60 h-auto mt-10">
-            <label for="categories" class="text-gray-800 text-xl font-bold">Calendar</label>
-            <input type="date" data-date-inline-picker="true" class="w-60 mt-5" />
+           <div id="calendar">
+            
+           </div>
+           
         </div>
     </div>
 
@@ -260,7 +263,8 @@ else{
 </div>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js">
+</script>
 <script>
     function toggleDD(myDropMenu) {
         document.getElementById(myDropMenu).classList.toggle("invisible");
@@ -359,4 +363,16 @@ else{
         }
 
     });
+
+
+// calender
+    
+new Calendar({
+    id: '#calendar',
+    calendarSize: 'small',
+    dateChanged: (date,month) => {
+        d = Date.parse(date) 
+    }
+})
+
 </script>

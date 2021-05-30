@@ -12,6 +12,22 @@
   <script src="main.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+  :root{
+  --cal-color-primary: #000000;
+  --cal-font-family-header: "Work Sans", sans-serif;
+  --cal-font-family-weekdays: "Work Sans", sans-serif;
+  --cal-font-family-body: "Work Sans", sans-serif;
+  --cal-drop-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+  --cal-border: none;
+  --cal-border-radius: 0.5rem;
+  --cal-header-color: black;
+  --cal-weekdays-color: black;
+}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-basic.css">
+
 </head>
 
 <body>
