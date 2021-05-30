@@ -32,8 +32,10 @@ if (isset($_POST['add_expense'])) {
     }
     
 }
+$current_month = date('m');
+// $current_month = 6;
 
-$query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b LEFT JOIN `expense` as e ON b.user_id = e.user_id and b.user_id = ".$_SESSION['userId'];
+$query = "SELECT `total_budget`,sum(`expense`) as `expense` from `budget` as b LEFT JOIN `expense` as e ON b.user_id = e.user_id and month(date) =  $current_month  and b.user_id = ".$_SESSION['userId'];
 $res = mysqli_query($conn,$query);
 
 if (mysqli_num_rows($res) > 0) {
@@ -42,6 +44,8 @@ if (mysqli_num_rows($res) > 0) {
     // print_r($data);
     // echo $_SESSION['userId'];
     $piechart_data = "[".$data['expense']." , $remaining_budget]";
+    
+
 }
 else{
     mysqli_error($conn);
@@ -62,8 +66,8 @@ else{
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-donate fa-lg w-full text-blue-600 p-4"></i>
-                            <p class="font-semibold text-2xl text-2x p-2">₹ 12000</p>
-                            <p class="text-blue-600 font-semibold p-2">Expenses & Revenues</p>
+                            <p class="font-semibold text-2xl text-2x p-2">₹ <?= $remaining_budget ?></p>
+                            <p class="text-blue-600 font-semibold p-2">Revenues</p>
                         </div>
                         <div class="w-1/3 p-5 text-center">
                             <i class="fas fa-wallet fa-lg w-full text-green-600 p-4"></i>
@@ -78,7 +82,7 @@ else{
                 <div class="w-full lg:w-1/3">
                     <div class="flex flex-col  flex-wrap w-full ">
                         <div class="px-2 py-5 text-2xl font-medium">Budget</div>
-                        <div class="h-52 ">
+                        <div class="h-52 w-full">
                             <canvas id="chart-doughnut" class="chartjs" width="undefined" height="undefined"></canvas>
 
                         </div>
@@ -106,7 +110,7 @@ else{
 
         <div class="m-10 flex flex-wrap justify-start">
             <?php
-            $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id` and c.user_id = $userId";
+            $str = "SELECT * FROM `expense` AS e,`categories` AS c WHERE `e`.`category_id` = `c`.`id` and month(date) =  $current_month and  c.user_id = $userId order by `expense` desc limit 6";
             $result = mysqli_query($conn, $str);
 
             while ($row = mysqli_fetch_array($result)) {
@@ -124,7 +128,6 @@ else{
                         ₹ <?php echo $row['expense']; ?>
                     </div>
                 </div>
-
             <?php
             }
 
@@ -163,7 +166,7 @@ else{
             //     $icon = $categories[$i][2];
 
             //echo "<option value='$id' >$name</option>";
-            $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e on `c`.`id` = `e`.`category_id` where c.user_id = $userId group by c.id";
+            $str = "SELECT `icon`,`name`,sum(`expense`) AS total FROM `categories` AS c LEFT JOIN `expense` AS e on `c`.`id` = `e`.`category_id` and month(e.date) =  $current_month where c.user_id = $userId   group by c.id order by sum(expense) desc";
             $result = mysqli_query($conn, $str);
 
             
@@ -265,6 +268,27 @@ else{
     </div>
 </div>
 
+<!-- Line chart data -->
+
+<?php   
+    $query = "SELECT DATE_FORMAT(date, '%M') as `month` ,SUM(expense) as `expense` FROM expense where user_id = ".$_SESSION['userId'] ." GROUP BY MONTH(date), YEAR(date) DESC";
+    $res = mysqli_query($conn,$query);
+    if (mysqli_num_rows($res) > 0 ) {
+        $month_lbl = "[";
+        $expenses = "[";
+        while($r = mysqli_fetch_assoc($res)){
+            $month_lbl .= "\"".$r['month']."\",";
+            $expenses .= "\"".$r['expense']."\",";
+
+        }
+        $month_lbl .= "]";
+        $expenses .= "]";
+
+        // print_r($month);
+    }
+
+?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js">
 </script>
@@ -290,11 +314,11 @@ else{
     new Chart(document.getElementById("chart"), {
         "type": "bar",
         "data": {
-            "labels": ["Jan", "Feb", "Mar", "Apr"],
+            "labels": <?= $month_lbl ?>,
             "color": 'red',
             "datasets": [{
 
-                "data": [5, 15, 10, 30],
+                "data": <?= $expenses ?>,
                 "type": "line",
                 "fill": false,
                 "borderColor": "rgba(99, 102, 241)"
@@ -310,6 +334,7 @@ else{
                         "fontColor": "rgba(31, 41, 55)",
                         "stepSize": 100,
                         "display": false,
+                        "max":60000,
 
                     },
                     "gridLines": {

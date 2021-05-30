@@ -55,7 +55,7 @@
         </button>
       </div>
         <div id="nav-links" class="hidden w-full pt-4 md:flex justify-center items-center">
-          <a href="<./index.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
+          <a href="./index.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Home</a>
           <?php
             if (isset($_SESSION['email'])) {
           ?>
