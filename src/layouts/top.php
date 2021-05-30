@@ -60,6 +60,8 @@
             if (isset($_SESSION['email'])) {
           ?>
           <a href="./dashboard.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Dashboard</a>
+          <a href="./analysis.php" class="flex flex-col text-center py-2 px-4 rounded hover:bg-indigo-500 hover:text-indigo-50">Analysis</a>
+
           <?php
             }
           ?>
