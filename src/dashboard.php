@@ -3,6 +3,7 @@ if (!isset($_SESSION['email'])) {
     header("location:login.php");
 }
 include "../db/db.php";
+include './mail.php';
 
 $userId = $_SESSION['userId'];
 
@@ -12,9 +13,9 @@ if (isset($_POST['add_expense'])) {
     $category = $_POST['category'];
     $desc = $_POST['description'];
     $date = $_POST['date'];
-    $today_dt = date("d m Y");
+    $today_dt = date("Y-m-d");
 
-    if ($date < $today_dt) 
+    if ($date <= $today_dt) 
     {
         $query = "INSERT INTO `expense` (`title`,`user_id`,`category_id`,`expense`,`date`,`description`) VALUES('$title',$userId,'$category',$amount,'$date','$desc')";
         $result = mysqli_query($conn, $query);
@@ -37,6 +38,12 @@ if (mysqli_num_rows($res) > 0)
 {
     $data = mysqli_fetch_assoc($res);
     $remaining_budget = number_format((float)($data['total_budget'] - $data['expense']), 2, '.', '');
+
+    $remaing_budget_percentage = (100 * $remaining_budget) / $data['total_budget'];
+    
+    if ($remaing_budget_percentage <= 10) { 
+        sendMail($_SESSION['email'],"Expense Alert","you spent 90% or more of your budget.<br> Please spent remaning budget carefully.");
+    }
     // print_r($data);
     // echo $_SESSION['userId'];
     $piechart_data = "[".$data['expense']." , $remaining_budget]";
